@@ -35,10 +35,9 @@ clean = zeros ( size ( data ) );
 % Eliminamos la proyecciÛn del ruido en cada canal.
 for i = 1: size ( data, 1 )
     % Utiliza la funci√≥n 'regress' para calcular la proyecciÛn del ruido.
-    X= 
-    beta = regress(data(i,:),);
+    beta = regress(data(i,:)',data(noise,:)');
     % Sustrae la proyecci√≥n del ruido del canal actual.
-    clean ( i, : ) = data(i, :) - beta;
+    clean ( i, : ) = data(i, :) - beta*data(noise,:);
 end
 
 % Comparamos los canales antes (rojo) y despu√©s (negro) del filtrado.
