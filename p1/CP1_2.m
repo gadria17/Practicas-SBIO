@@ -10,7 +10,7 @@ meg = importdata ( 'MEG_CP1.mat' );
 
 % Definimos la frecuencia de muestreo y el vector de tiempos (en ms).
 fs = 678.17;
-t  = (-26:93);
+t  = linspace(-26,150,120);
 
 % Selecciona únicamente el sensor 78.
 s78 = squeeze(meg(78,:,:));
