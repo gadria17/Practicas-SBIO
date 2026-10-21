@@ -27,10 +27,10 @@ eegplot ( data, 'srate', fs, 'winlength', 10 )
 uiwait
 
 % Selecciona el canal de la matriz que corresponde al ruido.
-noise = #
+noise = 20;
 
 % Utiliza la función 'sobi' para calcular la matriz de mezcla de ICA.
-mixing = sobi ( # );
+mixing = sobi (data);
 
 % Calculamos las componentes a partir de la inversa de la matriz de mezcla.
 ICAs  = pinv ( mixing ) * data;
@@ -62,8 +62,8 @@ ICAn = str2double ( ICAn );
 close all
 
 % Eliminamos la componente ruidosa y reconstruimos los datos.
-ICAs ( # ) = 0;
-clean = #
+ICAs ( ICAn,: ) = 0;
+clean = mixing*ICAs;
 
 % Comparamos los canales antes (rojo) y después (negro) del filtrado.
 eegplot ( clean, 'data2', data, 'srate', fs )
